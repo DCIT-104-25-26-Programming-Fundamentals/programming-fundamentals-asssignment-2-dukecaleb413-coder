@@ -41,4 +41,63 @@
 
 #include <iostream>
 using namespace std;
+#include <vector>
 
+int getSum(vector<int> numbers) {
+    int total = 0;
+    for (int n : numbers) {
+        total += n;
+    }
+    return total;
+}
+
+double getAverage(vector<int> numbers) {
+    return (double)getSum(numbers) / numbers.size();
+}
+
+int getMaximum(vector<int> numbers) {
+    int maximum = numbers[0];
+    for (int n : numbers) {
+        if (n > maximum) {
+            maximum = n;
+        }
+    }
+    return maximum;
+}
+
+int getMinimum(vector<int> numbers) {
+    int minimum = numbers[0];
+    for (int n : numbers) {
+        if (n < minimum) {
+            minimum = n;
+        }
+    }
+    return minimum;
+}
+
+int main() {
+    int count;
+    cout << "How many numbers? ";
+    cin >> count;
+
+    if (count <= 0) {
+        cout << "Error: N must be a positive integer." << endl;
+        return 0;
+    }
+
+    vector<int> numbers;
+    for (int i = 1; i <= count; i++) {
+        int num;
+        cout << "Enter number " << i << ": ";
+        cin >> num;
+        numbers.push_back(num);
+    }
+
+    cout << "\nResults:" << endl;
+    cout << "Sum:     " << getSum(numbers) << endl;
+    cout << "Average: " << getAverage(numbers) << endl;
+    cout << "Maximum: " << getMaximum(numbers) << endl;
+    cout << "Minimum: " << getMinimum(numbers) << endl;
+
+    return 0;
+}
