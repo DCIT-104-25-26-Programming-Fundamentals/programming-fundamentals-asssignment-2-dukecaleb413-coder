@@ -73,3 +73,101 @@
 #include <cmath>
 using namespace std;
 
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b, bool &error) {
+    if (b == 0) {
+        error = true;
+        return 0;
+    }
+    error = false;
+    return a / b;
+}
+
+double findModulus(double a, double b, bool &error) {
+    if (b == 0) {
+        error = true;
+        return 0;
+    }
+    error = false;
+    return (int)a % (int)b;
+}
+
+double exponentiate(double a, double b) {
+    return pow(a, b);
+}
+
+void showMenu() {
+    cout << "=========================" << endl;
+    cout << "SIMPLE CALCULATOR" << endl;
+    cout << "=========================" << endl;
+    cout << "1. Addition" << endl;
+    cout << "2. Subtraction" << endl;
+    cout << "3. Multiplication" << endl;
+    cout << "4. Division" << endl;
+    cout << "5. Modulus" << endl;
+    cout << "6. Exponentiation" << endl;
+    cout << "7. Quit" << endl;
+}
+
+int main() {
+    cout << fixed << setprecision(2);
+    int choice;
+
+    while (true) {
+        showMenu();
+        cout << "Select an operation (1-7): ";
+        cin >> choice;
+
+        if (choice == 7) {
+            cout << "Goodbye!" << endl;
+            break;
+        } else if (choice >= 1 && choice <= 6) {
+            double num1, num2;
+            cout << "Enter first number : ";
+            cin >> num1;
+            cout << "Enter second number: ";
+            cin >> num2;
+
+            bool error = false;
+
+            if (choice == 1) {
+                cout << "Result: " << num1 << " + " << num2 << " = " << add(num1, num2) << endl;
+            } else if (choice == 2) {
+                cout << "Result: " << num1 << " - " << num2 << " = " << subtract(num1, num2) << endl;
+            } else if (choice == 3) {
+                cout << "Result: " << num1 << " * " << num2 << " = " << multiply(num1, num2) << endl;
+            } else if (choice == 4) {
+                double result = divide(num1, num2, error);
+                if (error) {
+                    cout << "Error: Cannot divide by zero." << endl;
+                } else {
+                    cout << "Result: " << num1 << " / " << num2 << " = " << result << endl;
+                }
+            } else if (choice == 5) {
+                double result = findModulus(num1, num2, error);
+                if (error) {
+                    cout << "Error: Cannot divide by zero." << endl;
+                } else {
+                    cout << "Result: " << num1 << " % " << num2 << " = " << result << endl;
+                }
+            } else if (choice == 6) {
+                cout << "Result: " << num1 << " ^ " << num2 << " = " << exponentiate(num1, num2) << endl;
+            }
+        } else {
+            cout << "Error: Invalid choice. Please enter 1-7." << endl;
+        }
+    }
+
+    return 0;
+}
